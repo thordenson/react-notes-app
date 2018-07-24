@@ -1,4 +1,5 @@
 import React from "react";
+import DocumentList from './DocumentList';
 
 class App extends React.Component {
   render() {
@@ -9,13 +10,7 @@ class App extends React.Component {
           <input type="text" />
         </header>
 
-        <div className="document-list">
-          <ul>
-            <li className="document-list-item">Note number one</li>
-            <li className="document-list-item">Note number two</li>
-            <li className="document-list-item">Note number three</li>
-          </ul>
-        </div>
+        <DocumentList />
 
         <div className="document-editor">
           <textarea value="This is a note."/>
