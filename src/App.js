@@ -1,20 +1,24 @@
 import React from "react";
 import DocumentList from './DocumentList';
+import SearchBar from './SearchBar';
+import DocumentEditor from './DocumentEditor';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      notes: []
+    };
+  }
   render() {
     return (
-      <div className="App">
-        <header>
-          <h1> React Notes App </h1>
-          <input type="text" />
-        </header>
+      <div className="notes-app">
 
+        <SearchBar />
         <DocumentList />
+        <DocumentEditor />
 
-        <div className="document-editor">
-          <textarea value="This is a note."/>
-        </div>
       </div>
     );
   }
