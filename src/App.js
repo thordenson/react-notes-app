@@ -1,6 +1,7 @@
-import React from "react";
-import DocumentList from './DocumentList';
+import React from 'react';
+
 import SearchBar from './SearchBar';
+import DocumentList from './DocumentList';
 import DocumentEditor from './DocumentEditor';
 
 class App extends React.Component {
@@ -8,19 +9,19 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      selectedId: -1, // -1 means no selection
+      selectedId: -1,  // -1 means no selection
       notes: [
         {
           id: 1001,
-          timestanmp: new Date(),
+          timestamp: new Date(),
           title: 'The Life and Times of Oakley',
-          content: 'sqeak squeak, meow meow'
+          content: 'squeak squeak, mow mow.'
         },
         {
           id: 1002,
-          timestanmp: new Date(),
+          timestamp: new Date(),
           title: 'The Life and Times of Milla',
-          content: 'purr purr, drool drool'
+          content: 'purr purr, drool drool.'
         }
       ]
     };
@@ -30,25 +31,63 @@ class App extends React.Component {
       <div className="notes-app">
 
         <SearchBar />
-        <DocumentList allNotes= {this.state.notes}
-        handleSelection={this._selectNote}
+        <DocumentList
+          allNotes={this.state.notes}
+          handleSelection={this._selectNote}
         />
-        <DocumentEditor 
-          note={this.state.notes[0]}
+        <DocumentEditor
+          note={this._getSelectedNote()}
         />
-
       </div>
     );
   }
 
-  _selectNote = (noteID) => {
-    console.log(noteID);
+  _updateNote = (noteContent) => {
+    // grab existing note
+    let theNote = this._getSelectedNote();
 
-  // I want to save the ID of the selected note.
-  this.setState({
-    selectedId: noteId
-  });
-  
+    // make a copy and update the copy
+
+    // Version #1: Object.assign
+    // let updatedNote = Object.assign({}, theNote);
+    // updatedNote.content = noteContent;
+
+    // Version #2: sprinkles! a.k.a. "Object spread"
+    let updatedNote = {
+      ...theNote,
+      content: noteContent
+    };
+
+    let notesArrayWithUpdatedNote = [
+      ...this._allNotesExceptSelectedNote(),
+      updatedNote
+    ];
+    // set the state
+    this.setState({
+      notes: notesArrayWithUpdatedNote
+    });
+  }
+
+  _allNotesExceptSelectedNote = () => {
+    let notesWithoutSelectedNote = this.state.notes.filter(note => note.id !== this.state.selectedId);
+    return notesWithoutSelectedNote;
+  }
+
+  _getSelectedNote = () => {
+    let theNote = this.state.notes.find(note => note.id === this.state.selectedId);
+    if (!theNote) {
+      theNote = this.state.notes[0];
+    }
+    return theNote;
+  }
+
+  _selectNote = (noteId) => {
+    console.log(noteId);
+    // I want to save the id
+    // of the selected note.
+    this.setState({
+      selectedId: noteId
+    });
   }
 
 }
