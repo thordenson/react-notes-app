@@ -37,6 +37,7 @@ class App extends React.Component {
         />
         <DocumentEditor
           note={this._getSelectedNote()}
+          handleChange={this._updateNote}
         />
       </div>
     );

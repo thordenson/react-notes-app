@@ -6,6 +6,9 @@ render() {
         <div className="document-editor">
             <textarea 
                 value={this.props.note.content}
+                onChange={(e) => {
+                    this.props.handleChange(e.target.value)
+                }}
             />
         </div>
         );
