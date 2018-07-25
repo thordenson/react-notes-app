@@ -6,7 +6,12 @@ render() {
         <div className="App">
             <header>
                 <h1> React Notes App </h1>
-                <input type="text" />
+                <input type="text" 
+                value={this.props.text}
+                onChange={(e) => {
+                    this.props.handleCahnge(e.target.value)
+                }}
+                />
             </header>
         </div>
         );

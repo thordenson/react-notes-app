@@ -9,6 +9,7 @@ class App extends React.Component {
     super(props);
 
     this.state = {
+      searchText: '',
       selectedId: -1,  // -1 means no selection
       notes: [
         {
@@ -30,7 +31,10 @@ class App extends React.Component {
     return (
       <div className="notes-app">
 
-        <SearchBar />
+        <SearchBar 
+        text={this.state.searchText}
+        handlChange={this._updateSearchText}
+        />
         <DocumentList
           allNotes={this.state.notes}
           handleSelection={this._selectNote}
@@ -46,6 +50,12 @@ class App extends React.Component {
   componentDidMount() {
     this.setState({
       selectedId: this.state.notes[0].id
+    });
+  }
+
+  _updateSearchText = (newSearchText) => {
+    this.setState({
+      searchText: newSearchText
     });
   }
 
