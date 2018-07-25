@@ -23,17 +23,30 @@ class App extends React.Component {
           timestamp: new Date(),
           title: 'The Life and Times of Milla',
           content: 'purr purr, drool drool.'
+        },
+        {
+          id: 1003,
+          timestamp: new Date(),
+          title: 'All the Things',
+          content: 'stuffs stuffy stuff stuff.'
+        },
+        {
+          id: 1004,
+          timestamp: new Date(),
+          title: 'The secret code to all the presidents rubies',
+          content: 'Burt Tyrannosaurus Macklin.'
         }
       ]
     };
   }
+
   render() {
     return (
       <div className="notes-app">
 
-        <SearchBar 
-        text={this.state.searchText}
-        handlChange={this._updateSearchText}
+        <SearchBar
+          text={this.state.searchText}
+          handleChange={this._updateSearchText}
         />
         <DocumentList
           allNotes={this.state.notes}
@@ -107,6 +120,20 @@ class App extends React.Component {
     return notesWithoutSelectedNote;
   }
 
+  _getFilteredNotes = () => {
+    // Is there any search text
+    if (this.state.searchText !== '') {
+      // If so, filter the notes
+      let filteredNotes = this.state.notes.filter(note => {
+        
+      });
+      return filteredNotes;
+    } else {
+        // If not, return all the notes
+      return this.state.notes
+      }
+    }
+
   _getSelectedNote = () => {
     let theNote = this.state.notes.find(note => note.id === this.state.selectedId);
     if (!theNote) {
@@ -126,4 +153,4 @@ class App extends React.Component {
 
 }
 
-export default App;
+ export default App;

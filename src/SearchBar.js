@@ -9,7 +9,7 @@ render() {
                 <input type="text" 
                 value={this.props.text}
                 onChange={(e) => {
-                    this.props.handleCahnge(e.target.value)
+                    this.props.handleChange(e.target.value)
                 }}
                 />
             </header>
