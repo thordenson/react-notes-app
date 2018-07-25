@@ -49,7 +49,7 @@ class App extends React.Component {
           handleChange={this._updateSearchText}
         />
         <DocumentList
-          allNotes={this.state.notes}
+          allNotes={this._getFilteredNotes()}
           handleSelection={this._selectNote}
         />
         <DocumentEditor
@@ -125,7 +125,13 @@ class App extends React.Component {
     if (this.state.searchText !== '') {
       // If so, filter the notes
       let filteredNotes = this.state.notes.filter(note => {
-        
+        let doesTitleMatch = note.title.toLowerCase().includes(this.state.searchText.toLowerCase());
+
+        let doesContentMatch = note.content.toLowerCase().includes
+        (this.state.searchText.toLowerCase());
+
+
+        return doesTitleMatch || doesContentMatch;
       });
       return filteredNotes;
     } else {
