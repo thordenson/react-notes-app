@@ -58,10 +58,23 @@ class App extends React.Component {
       content: noteContent
     };
 
+    // put the copy of the note in a copy of the array
+
+    // Version #1: map
+    // let notesArrayWithUpdatedNote = this.state.notes.map(note => {
+    //   if (note.id === this.state.selectedId) {
+    //     return updatedNote;
+    //   } else {
+    //     return note;
+    //   }
+    // });
+
+    // Version #2: sprinkles! a.k.a. "Array spread"
     let notesArrayWithUpdatedNote = [
       ...this._allNotesExceptSelectedNote(),
       updatedNote
     ];
+
     // set the state
     this.setState({
       notes: notesArrayWithUpdatedNote
